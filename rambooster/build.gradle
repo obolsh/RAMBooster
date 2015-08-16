@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 // This is the library version used when deploying the artifact
-version = "1.0.1"
+version = "1.0.2"
 group = "com.github.obolsh"
 
 android {
@@ -13,7 +13,7 @@ android {
         minSdkVersion 8
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -49,7 +49,9 @@ uploadArchives {
         repository(url: sonatypeRepo) {
             authentication(userName: sonatypeUsername,   password: sonatypePassword)
         }
-
+        snapshotRepository(url: snapshotRepo) {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
+        }
         pom.project {
             packaging 'aar'
             name 'RAM Booster Library'
