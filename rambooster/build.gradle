@@ -1,4 +1,10 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+// This is the library version used when deploying the artifact
+version = "1.0.1"
+group = "com.github.obolsh"
 
 android {
     compileSdkVersion 21
@@ -17,7 +23,59 @@ android {
     }
     productFlavors {
     }
+
 }
 
+
 dependencies {
+
+}
+
+
+configurations {
+    archives {
+        extendsFrom configurations.default
+    }
+}
+signing {
+    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        repository(url: sonatypeRepo) {
+            authentication(userName: sonatypeUsername,   password: sonatypePassword)
+        }
+
+        pom.project {
+            packaging 'aar'
+            name 'RAM Booster Library'
+            description = 'The project aims to provide a searching running processes and then finishing them.'
+            url 'https://github.com/obolsh/RAMBooster'
+
+            scm {
+                url 'scm:git@github.com:obolsh/RAMBooster.git'
+                connection 'scm:git@github.com:obolsh/RAMBooster.git'
+                developerConnection 'scm:git@github.com:obolsh/RAMBooster.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'obolsh'
+                    name 'Aleksey Bolshakov'
+                    email 'obolsh@gmail.com'
+                }
+            }
+        }
+    }
 }
