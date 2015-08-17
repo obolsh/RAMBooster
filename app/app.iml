@@ -85,7 +85,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="rambooster" exported="" />
+    <orderEntry type="library" exported="" name="rambooster-1.0.2" level="project" />
   </component>
 </module>
 

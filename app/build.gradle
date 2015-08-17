@@ -20,6 +20,6 @@ android {
 }
 
 dependencies {
-    compile project(':rambooster')
-    //compile 'com.github.obolsh:RAMBooster:1.0.1'
+    
+    compile 'com.github.obolsh:rambooster:1.0.2@aar'
 }
