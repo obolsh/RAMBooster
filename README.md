@@ -4,8 +4,9 @@ Android RAMBooster
 ## Setup is easy:
 * **put this permissions into manifest:**
 
-```<uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
-<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />```
+`<uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />`
+
+`<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />`
 
 * **add this service into application tag in manifest:**
 
@@ -13,19 +14,22 @@ Android RAMBooster
 
 * **add this line into your dependencies for Gradle:**
 
-```dependencies {
-
+```
+dependencies {
        compile 'com.github.obolsh:rambooster:1.0.2@aar'
+}
+```
 
-   }```
    or this for Maven:
 
-   ```<dependency>
+   ```
+   <dependency>
      <groupId>com.github.obolsh</groupId>
      <artifactId>rambooster</artifactId>
      <version>1.0.2</version>
      <type>aar</type>
-   </dependency>```
+   </dependency>
+   ```
 
 * **rebuild your project**
 
@@ -38,21 +42,25 @@ Now you are able to launch RAM Booster. Add this lines into your code:
 
 * **setup scan listener:**
 
-```booster.setScanListener(new ScanListener() {
+```
+booster.setScanListener(new ScanListener() {
 @Override
 public void onStarted() {}
 @Override
 public void onFinished(long availableRam, long totalRam, List<ProcessInfo> appsToClean) {}
-});```
+});
+```
 
 * **setup clean listener:**
 
-```booster.setCleanListener(new CleanListener() {
+```
+booster.setCleanListener(new CleanListener() {
 @Override
 public void onStarted() {}
 @Override
 public void onFinished(long availableRam, long totalRam) {}
-});```
+});
+```
 
 * **start scanning, set true if apps marked as system have to be also cleaned:**
 
