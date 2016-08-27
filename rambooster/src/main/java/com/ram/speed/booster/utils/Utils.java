@@ -27,7 +27,7 @@ public class Utils {
 
             }
             //total Memory
-            initial_memory = Integer.valueOf(arrayOfString[1]).intValue() * 1024;
+            initial_memory = Long.valueOf(arrayOfString[1]).longValue() * (long) 1024;
             localBufferedReader.close();
             return initial_memory;
         } catch (IOException e) {
