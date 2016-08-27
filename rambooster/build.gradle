@@ -3,8 +3,8 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 // This is the library version used when deploying the artifact
-version = "1.0.2"
-group = "com.github.obolsh"
+version = "1.0.3"
+group = "com.github.kerolos-sss"
 
 android {
     compileSdkVersion 21
@@ -56,12 +56,12 @@ uploadArchives {
             packaging 'aar'
             name 'RAM Booster Library'
             description = 'The project aims to provide a searching running processes and then finishing them.'
-            url 'https://github.com/obolsh/RAMBooster'
+            url 'https://github.com/kerolos-sss/RAMBooster'
 
             scm {
-                url 'scm:git@github.com:obolsh/RAMBooster.git'
-                connection 'scm:git@github.com:obolsh/RAMBooster.git'
-                developerConnection 'scm:git@github.com:obolsh/RAMBooster.git'
+                url 'scm:git@github.com:kerolos-sss/RAMBooster.git'
+                connection 'scm:git@github.com:kerolos-sss/RAMBooster.git'
+                developerConnection 'scm:git@github.com:kerolos-sss/RAMBooster.git'
             }
 
             licenses {
@@ -73,9 +73,9 @@ uploadArchives {
 
             developers {
                 developer {
-                    id 'obolsh'
-                    name 'Aleksey Bolshakov'
-                    email 'obolsh@gmail.com'
+                    id 'kerolos-sss'
+                    name 'Kerolos Bisheer'
+                    email 'kerolos.sss@gmail.com'
                 }
             }
         }
