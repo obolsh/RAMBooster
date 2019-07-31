@@ -44,10 +44,13 @@ Now you are able to launch RAM Booster. Add this lines into your code:
 
 ```
 booster.setScanListener(new ScanListener() {
-@Override
-public void onStarted() {}
-@Override
-public void onFinished(long availableRam, long totalRam, List<ProcessInfo> appsToClean) {}
+       @Override
+       public void onStarted() {
+       }
+       
+       @Override
+       public void onFinished(long availableRam, long totalRam, List<ProcessInfo> appsToClean) {
+       }
 });
 ```
 
@@ -55,10 +58,13 @@ public void onFinished(long availableRam, long totalRam, List<ProcessInfo> appsT
 
 ```
 booster.setCleanListener(new CleanListener() {
-@Override
-public void onStarted() {}
-@Override
-public void onFinished(long availableRam, long totalRam) {}
+       @Override
+       public void onStarted() {
+       }
+       
+       @Override
+       public void onFinished(long availableRam, long totalRam) {
+       }
 });
 ```
 
