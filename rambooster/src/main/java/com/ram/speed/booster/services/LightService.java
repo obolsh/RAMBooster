@@ -3,6 +3,7 @@ package com.ram.speed.booster.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
+
 import com.ram.speed.booster.RAMBooster;
 import com.ram.speed.booster.interfaces.CleanListener;
 import com.ram.speed.booster.interfaces.ScanListener;
@@ -11,7 +12,7 @@ import com.ram.speed.booster.tasks.MemoryScanner;
 import com.ram.speed.booster.utils.Constants;
 
 
-public class LightService extends IntentService implements Constants{
+public class LightService extends IntentService implements Constants {
 
     public static boolean alreadyRunning = false;
 
@@ -22,22 +23,22 @@ public class LightService extends IntentService implements Constants{
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        if (intent.getAction().equals(ACTION_SCAN)){
+        if (intent.getAction().equals(ACTION_SCAN)) {
             if (RAMBooster.isDEBUG())
-            Log.d(TAG, "Start scanning task");
+                Log.d(TAG, "Start scanning task");
             ScanListener listener = RAMBooster.getScanListener();
-                if (listener!=null)
-                new Thread(new MemoryScanner(getApplicationContext(),listener )).start();
+            if (listener != null)
+                new Thread(new MemoryScanner(getApplicationContext(), listener)).start();
             else {
-                    if (RAMBooster.isDEBUG())
-                        Log.d(TAG, "Cannot start scanning task, listener is empty. Skip");
-                }
+                if (RAMBooster.isDEBUG())
+                    Log.d(TAG, "Cannot start scanning task, listener is empty. Skip");
+            }
 
-        } else if (intent.getAction().equals(ACTION_CLEAN)){
+        } else if (intent.getAction().equals(ACTION_CLEAN)) {
             if (RAMBooster.isDEBUG())
                 Log.d(TAG, "Start cleaning task");
             CleanListener listener = RAMBooster.getCleanListener();
-            if (listener!=null)
+            if (listener != null)
                 new Thread(new CleanTask(getApplicationContext(),
                         RAMBooster.getAppProcessInfos(), listener)).start();
             else {

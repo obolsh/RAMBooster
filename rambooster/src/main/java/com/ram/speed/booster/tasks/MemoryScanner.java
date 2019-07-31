@@ -13,13 +13,14 @@ import com.ram.speed.booster.utils.Constants;
 import com.ram.speed.booster.utils.MemoryFreedPredication;
 import com.ram.speed.booster.utils.ProcessInfo;
 import com.ram.speed.booster.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MemoryScanner implements Runnable,Constants {
+public class MemoryScanner implements Runnable, Constants {
 
-    private  Context context;
+    private Context context;
     private ScanListener listener;
 
     public MemoryScanner(Context context, ScanListener listener) {
@@ -30,20 +31,20 @@ public class MemoryScanner implements Runnable,Constants {
     @Override
     public void run() {
         if (RAMBooster.isDEBUG())
-        Log.d(TAG, "Scanner started...");
+            Log.d(TAG, "Scanner started...");
         listener.onStarted();
-        ActivityManager activityManager = (ActivityManager)   context.getSystemService(Activity.ACTIVITY_SERVICE);
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Activity.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfos =
                 filterProcesses(activityManager.getRunningAppProcesses());
         List<ProcessInfo> appProcessesInfos = createProcessInfosFromRunningApps(runningAppProcessInfos);
         RAMBooster.setAppProcessInfos(appProcessesInfos);
 
-        long availableRam = Utils.calculateAvailableRAM(context)/weight;
-        long totalRam=Utils.calculateTotalRAM()/weight;
+        long availableRam = Utils.calculateAvailableRAM(context) / weight;
+        long totalRam = Utils.calculateTotalRAM() / weight;
 
-        listener.onFinished(availableRam,totalRam,appProcessesInfos);
+        listener.onFinished(availableRam, totalRam, appProcessesInfos);
         if (RAMBooster.isDEBUG())
-        Log.d(TAG, "Scanner finished");
+            Log.d(TAG, "Scanner finished");
 
     }
 
@@ -58,10 +59,10 @@ public class MemoryScanner implements Runnable,Constants {
             try {
                 ApplicationInfo applicationInfo = getApplicationInfo(processInfo.processName);
                 if (RAMBooster.isDEBUG())
-                    Log.d(TAG, "Scanner founded process: "+applicationInfo.packageName);
+                    Log.d(TAG, "Scanner founded process: " + applicationInfo.packageName);
                 // remove system processes
                 if (!RAMBooster.mShouldCleanSystemApps())
-                if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue;
+                    if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue;
                 // remove SpeedChecker app process
                 if (applicationInfo.packageName.equals(context.getPackageName())) continue;
 
@@ -78,8 +79,9 @@ public class MemoryScanner implements Runnable,Constants {
             .NameNotFoundException {
         return context.getPackageManager().getApplicationInfo(packageName, 0);
     }
+
     private List<ProcessInfo> createProcessInfosFromRunningApps(List<ActivityManager
-            .RunningAppProcessInfo>  processInfos) {
+            .RunningAppProcessInfo> processInfos) {
         MemoryFreedPredication predication = MemoryFreedPredication.getInstance(context);
 
         List<ProcessInfo> processes = new ArrayList<ProcessInfo>();

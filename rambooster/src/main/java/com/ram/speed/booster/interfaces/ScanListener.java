@@ -7,6 +7,7 @@ import java.util.List;
 public interface ScanListener {
 
     void onStarted();
+
     void onFinished(long availableRam, long totalRam, List<ProcessInfo> appsToClean);
 
 }

@@ -9,12 +9,13 @@ import com.ram.speed.booster.interfaces.CleanListener;
 import com.ram.speed.booster.utils.Constants;
 import com.ram.speed.booster.utils.ProcessInfo;
 import com.ram.speed.booster.utils.Utils;
+
 import java.util.List;
 
 public class CleanTask implements Runnable, Constants {
 
-    private  Context context;
-    private  List<ProcessInfo> appProcessInfos;
+    private Context context;
+    private List<ProcessInfo> appProcessInfos;
     private CleanListener listener;
 
     public CleanTask(Context context, List<ProcessInfo> appProcessInfos, CleanListener listener) {
@@ -38,10 +39,10 @@ public class CleanTask implements Runnable, Constants {
         if (appProcessInfos != null) {
             killAppProcesses(appProcessInfos);
         }
-        long availableRam = Utils.calculateAvailableRAM(context)/weight;
-        long totalRam= Utils.calculateTotalRAM()/weight;
+        long availableRam = Utils.calculateAvailableRAM(context) / weight;
+        long totalRam = Utils.calculateTotalRAM() / weight;
 
-        listener.onFinished(availableRam,totalRam);
+        listener.onFinished(availableRam, totalRam);
         if (RAMBooster.isDEBUG())
             Log.d(TAG, "Cleaner finished");
     }

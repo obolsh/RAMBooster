@@ -4,18 +4,20 @@ package com.ram.speed.booster;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
 import com.ram.speed.booster.interfaces.Booster;
 import com.ram.speed.booster.interfaces.CleanListener;
 import com.ram.speed.booster.interfaces.ScanListener;
 import com.ram.speed.booster.services.LightService;
 import com.ram.speed.booster.utils.Constants;
 import com.ram.speed.booster.utils.ProcessInfo;
+
 import java.util.List;
 
 /***
  * Entry point for RAM Booster
  */
-public class RAMBooster implements Booster,Constants{
+public class RAMBooster implements Booster, Constants {
 
     private static ScanListener mScanListener;
     private static CleanListener mCleanListener;
@@ -44,11 +46,11 @@ public class RAMBooster implements Booster,Constants{
 
 
     public RAMBooster(Context context) {
-        appProcessInfos=null;
-        mScanListener=null;
-        mCleanListener=null;
-        shouldCleanSystemApps=false;
-        DEBUG=false;
+        appProcessInfos = null;
+        mScanListener = null;
+        mCleanListener = null;
+        shouldCleanSystemApps = false;
+        DEBUG = false;
         this.context = context;
     }
 
@@ -72,6 +74,7 @@ public class RAMBooster implements Booster,Constants{
     public static ScanListener getScanListener() {
         return mScanListener;
     }
+
     /***
      * set listener for cleaning process
      * @param listener
@@ -92,12 +95,12 @@ public class RAMBooster implements Booster,Constants{
      */
     @Override
     public void startScan(boolean isSystem) {
-        if (!LightService.alreadyRunning){
+        if (!LightService.alreadyRunning) {
             shouldCleanSystemApps = isSystem;
             Intent serviceIntent = new Intent(context, LightService.class);
             serviceIntent.setAction(ACTION_SCAN);
             context.startService(serviceIntent);
-        } else{
+        } else {
             if (DEBUG)
                 Log.d(TAG, "Already Scanning.Skip");
         }
@@ -109,8 +112,8 @@ public class RAMBooster implements Booster,Constants{
      */
     @Override
     public void startClean() {
-        if (!LightService.alreadyRunning){
-            if (appProcessInfos!=null){
+        if (!LightService.alreadyRunning) {
+            if (appProcessInfos != null) {
                 Intent serviceIntent = new Intent(context, LightService.class);
                 serviceIntent.setAction(ACTION_CLEAN);
                 context.startService(serviceIntent);
@@ -119,7 +122,7 @@ public class RAMBooster implements Booster,Constants{
                     Log.d(TAG, "Cannot start cleaning before scanning.Skip");
             }
 
-        } else{
+        } else {
             if (DEBUG)
                 Log.d(TAG, "Already Cleaning.Skip");
         }

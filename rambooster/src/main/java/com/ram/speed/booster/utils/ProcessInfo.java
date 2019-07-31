@@ -3,9 +3,9 @@ package com.ram.speed.booster.utils;
 import android.app.ActivityManager;
 
 public class ProcessInfo {
-    private  int pid;
+    private int pid;
     private int memoryUsage;
-    private  String processName;
+    private String processName;
 
     public ProcessInfo(ActivityManager.RunningAppProcessInfo processInfo) {
         this.pid = processInfo.pid;
